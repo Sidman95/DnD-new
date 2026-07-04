@@ -1,158 +1,167 @@
-# Claude as Your Dungeon Master
+# Claude — твой гейм-мастер
 
-Claude is a genuinely good DM. Not "good for an AI" -- actually good. It tracks NPCs with their own agendas, runs tactical combat on ASCII maps with proper 5e rules, keeps secret plot notes you can't see, and writes prose that lands somewhere between Joe Abercrombie and a really well-prepped human DM who never cancels on game night. This repo is a ready-to-go template for running full D&D 5e campaigns with Claude Code as your Dungeon Master.
+Готовый шаблон для игры в настольные RPG с Claude Code в роли гейм-мастера. Клод ведёт полноценные кампании: отыгрывает NPC и компаньонов с собственными характерами и целями, ведёт тактические бои на ASCII-картах по правилам d20, держит секретные сюжетные заметки, в которые ты не можешь заглянуть, и пишет живую художественную прозу — а не «текст от ИИ».
 
-## What You Need
+Главное отличие этого шаблона: он не привязан к одному сеттингу. Хочешь классическое фэнтези D&D — пожалуйста. Хочешь кампанию во вселенной Star Wars, Mass Effect или Ведьмака — Клод сверится с каноном по профильным вики (Wookieepedia и т.п.), включая экономику и цены. Хочешь собственный мир «в духе Dragon Age» — Клод сначала полностью пропишет его лор и только потом начнёт игру.
 
-- **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** -- Anthropic's CLI tool. This is how you talk to Claude in your terminal.
-- **A GitHub account** -- campaigns are tracked with git. Free account is fine.
-- That's it. No dice, no minis, no scheduling conflicts.
+## Что нужно
 
-## Quick Start
+- **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — CLI-инструмент Anthropic.
+- **Аккаунт GitHub** — кампании хранятся в git. Бесплатного достаточно.
+- Всё. Ни кубиков, ни миниатюр, ни поиска свободного вечера у друзей.
 
-### 1. Fork and Clone
+## Быстрый старт
 
-Fork this repo on GitHub, then clone your fork:
+### 1. Форк и клон
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/claude-dnd.git
 cd claude-dnd
 ```
 
-### 2. Create a Campaign Branch
+### 2. Ветка под кампанию
 
-Each campaign lives on its own branch. Main stays clean as the template.
+Каждая кампания живёт на своей ветке. `main` остаётся чистым шаблоном.
 
 ```bash
-git checkout -b my-campaign
-git push -u origin my-campaign
+git checkout -b moya-kampaniya
+git push -u origin moya-kampaniya
 ```
 
-### 3. Start Playing
+### 3. Играй
 
-Launch Claude Code in the repo directory:
+Запусти Claude Code в папке репозитория:
 
 ```bash
 claude
 ```
 
-Claude will read the `CLAUDE.md` instructions and know it's your DM. Tell it about the character you want to play -- name, race, class, backstory, whatever you've got. Claude will set up your character sheet, build the opening scene, and you're off.
+Клод прочитает `CLAUDE.md` и поймёт, что он — твой ГМ. Общение — полностью на русском.
 
-Your first message can be as simple as:
+## Сессия 0: как создаётся мир
 
-> I want to play a halfling rogue named Pip who grew up picking pockets in a harbour city.
+На новой ветке (пока нет `world_bible.md`) Клод не начинает игру сразу — сначала он проходит протокол подготовки. Именно это делает результат предсказуемым: мир и правила фиксируются в файлах ДО первой сцены, и Клод обязан их придерживаться всю кампанию.
 
-Claude takes it from there.
+Первым сообщением опиши, во что хочешь играть. Три варианта:
 
-## How Campaigns Work
+**Существующая вселенная** — Клод обязан сверяться с каноном:
 
-### One Branch Per Campaign
+> Хочу кампанию во вселенной Star Wars, эпоха Войн клонов, незадолго до Приказа 66. Играю за падавана.
 
-The `main` branch is the template. It contains:
-- `CLAUDE.md` -- all the DM instructions, rules, and protocols
-- `DND.SRD.Wiki/` -- the complete 5e SRD rules reference
-- This README
+Клод полезет в Wookieepedia (или профильную вики другой вселенной), зафиксирует точку на таймлайне, политическую карту, технологии и **каноническую экономику с реальными ценами** — всё со ссылками на источники в `world_bible.md`. Дальше канон — закон: противоречить ему Клод не имеет права.
 
-When you create a branch and start playing, Claude generates campaign files as you go. Each branch is a self-contained campaign with its own characters, world, and story.
+**Кастомный мир** — Клод сначала пишет полную библию мира:
 
-### Everything is Markdown
+> Придумай новый мир, вдохновляясь Ведьмаком и Dragon Age: магия под надзором, орден охотников, тёмное фэнтези.
 
-Campaign state lives in plain text files that Claude reads and updates as you play:
+До начала игры будет прописано всё: космология, пределы магии, история, география, фракции, культуры, религии, экономика с ценами. После твоего одобрения лор фиксируется — новое только дописывается и не может противоречить написанному.
 
-| File | What It Tracks |
-|------|---------------|
-| `character.md` | Your character sheet -- stats, abilities, backstory |
-| `inventory.md` | Equipment, currency, consumables |
-| `world_state.md` | The current state of everything (this is the source of truth) |
-| `adventure_log.md` | Session-by-session recaps of what happened |
-| `npcs.md` | NPCs you've met and what you know about them |
-| `locations.md` | Places you've been |
-| `names.md` | Name registry so the DM doesn't reuse names |
-| `adventure_style.md` | Tone and style preferences for your campaign |
-| `dm_only/` | The DM's secret notes -- plot threads, NPC agendas, hidden information |
+**Классическое фэнтези** — минимальная подготовка, чистые правила D&D 5e:
 
-### Git is Your Save System
+> Хочу играть за полурослика-плута по имени Пип, который вырос в портовом городе.
 
-Every commit is a save point. Claude will save progress at natural breakpoints (end of a session, after a big fight, at a long rest), but you can also commit manually whenever you want:
+В любом случае игра начинается только после того, как ты **явно одобришь** мир и правила. Потом — создание персонажа и первая сцена.
+
+## Как устроены правила
+
+Гибридная модель, двухслойная:
+
+- **Неизменное ядро** — скелет d20/5e: проверки d20 + модификатор, преимущество/помеха, инициатива, структура хода, криты, спасброски от смерти. Одинаково в любом сеттинге — механика всегда знакома и обкатана.
+- **Сеттинговый слой** (`game_rules.md`) — то, что делает сеттинг сеттингом: атрибуты, ресурсы (мана, очки Силы, патроны), оружие и урон, классы, экономика, особые механики (отражение бластерных выстрелов, тёмная сторона, ведьмачьи знаки). Заполняется на Сессии 0 по строгому шаблону — эталон качества лежит в `templates/examples/star_wars_5e.md`.
+
+Полный SRD D&D 5e (`DND.SRD.Wiki/`) остаётся запасным движком: где сеттинговый слой молчит — действует SRD.
+
+## Как общаться с ГМом
+
+Три режима, как за живым столом:
+
+| Формат | Значение | Пример |
+|--------|----------|--------|
+| `"В кавычках"` | Твой персонаж говорит вслух | *«Я тебе не верю, трактирщик»* |
+| Обычный текст | Действия, мысли, указания ГМу | *Обыскиваю комнату на предмет тайников* |
+| `[В скобках]` | Вне игры (OOC) | *[Можем отмотать последнюю сцену?]* |
+
+Скобки — твой внеигровой канал: вопросы по правилам, просьба о рекапе, пауза, фидбек. Клод ответит и **остановится** — история не сдвинется, пока ты не сделаешь игровое действие.
+
+Важные правила за столом:
+
+- **Ты управляешь только своим персонажем.** Всех остальных — NPC, врагов и компаньонов, в том числе в бою — отыгрывает ГМ. Компаньоны действуют сами: спорят, ошибаются, имеют мнение.
+- **ГМ никогда не говорит за твоего персонажа** и не подсказывает, что делать. Мир описан — дальше твой ход.
+- **ГМ не читает мораль.** Играй святого, наёмника или чудовище — последствия будут только внутри мира: репутация, закон, месть, благодарность.
+- **Все броски открыты.** Каждый значимый бросок показывается явно: что бросается, против какого DC, кубик + модификаторы, итог — успех или провал.
+- **Мир не подстраивается под твой уровень.** Некоторые бои нельзя выиграть в лоб — но Клод всегда даст это понять заранее. Отступление — тоже тактика.
+
+## Git — твоя система сохранений
+
+Каждый коммит — точка сохранения. Клод сам коммитит на естественных паузах (конец сессии, после большого боя, на привале), но можно и вручную:
 
 ```bash
-git add -A && git commit -m "Session 3: Escaped the goblin caves" && git push
+git add -A && git commit -m "Сессия 3: сбежали из гоблинских пещер" && git push
 ```
 
-Want to undo a terrible decision? (In the game, obviously.) You can roll back to any previous commit. Git gives you unlimited save slots with perfect recall.
+Хочешь откатить катастрофическое решение? Возвращайся к любому коммиту. Безлимитные слоты сохранений с идеальной памятью.
 
-### Multiple Campaigns
-
-Switch between campaigns by switching branches:
+Несколько кампаний — несколько веток:
 
 ```bash
-git checkout my-other-campaign
+git checkout drugaya-kampaniya
 ```
 
-Each campaign is completely independent. Play a gritty dungeon crawl on one branch and a lighthearted tavern romp on another.
+Каждая ветка полностью независима: на одной — мрачный данжен-кроул, на другой — космоопера.
 
-## File Structure
+## Структура файлов
 
 ```
 claude-dnd/
-  CLAUDE.md              # DM instructions and rules (the brains)
-  DND.SRD.Wiki/          # 5e SRD -- spells, monsters, classes, the works
-  README.md              # You are here
+  CLAUDE.md              # Движок ГМа: инструкции и протоколы (не меняется под кампанию)
+  DND.SRD.Wiki/          # Полный SRD 5e: заклинания, монстры, классы
+  templates/             # Шаблоны файлов кампании (заполняются на Сессии 0)
+    world_bible.md       #   Библия мира (канон или кастом)
+    game_rules.md        #   Правила: ядро + сеттинговый слой
+    character.md         #   Лист персонажа
+    adventure_style.md   #   Тон и стиль
+    story_prep.md        #   Секреты ГМа
+    examples/
+      star_wars_5e.md    #   Эталонный пример сеттингового слоя
+  README.md              # Ты здесь
 
-  # These appear on campaign branches after you start playing:
-  character.md           # Your character sheet
-  inventory.md           # Gear and gold
-  world_state.md         # Current state of the world
-  adventure_log.md       # What happened each session
-  npcs.md                # People you've met
-  locations.md           # Places you've been
-  names.md               # Name registry
-  adventure_style.md     # Campaign tone and style
-  session_X_notes.md     # Working notes for the current session
-  dm_only/               # DM secrets (no peeking)
-    story_prep.md        # Plot threads, NPC agendas, hidden plans
+  # Появляются на ветке кампании после Сессии 0:
+  world_bible.md         # Лор мира — источник истины, Клод не может ему противоречить
+  game_rules.md          # Правила этой кампании
+  character.md           # Твой персонаж
+  inventory.md           # Снаряжение и деньги
+  world_state.md         # Текущее состояние мира
+  adventure_log.md       # Что происходило по сессиям
+  npcs.md                # Кого ты встретил
+  locations.md           # Где ты был
+  names.md               # Реестр имён (чтобы ГМ не повторялся)
+  adventure_style.md     # Тон и стиль кампании
+  session_X_notes.md     # Рабочие заметки текущей сессии
+  dm_only/               # Секреты ГМа (не подглядывать!)
+    story_prep.md        # Сюжетные планы, скрытые мотивы NPC
 ```
 
-## Tips
+## Советы
 
-- **Commit often.** Git is your save system. More commits means more points you can rewind to if something goes sideways.
-
-- **Don't peek in `dm_only/`.** Seriously. Claude uses a separate sub-agent to read and write its secret notes so they never appear in your conversation. If you go reading `story_prep.md` you're only spoiling it for yourself.
-
-- **Talk to Claude like a human DM.** There are three modes of communication:
-
-  | Format | Meaning | Example |
-  |--------|---------|---------|
-  | `"Quoted text"` | Your character speaking aloud | *"I don't trust you, innkeeper."* |
-  | Plain text | Actions, thoughts, or directions | *I search the room for hidden doors.* |
-  | `[Square brackets]` | Out-of-character (OOC) | *[Can we retcon that last bit?]* |
-
-  Square brackets are your out-of-character channel. Use them to ask rules questions, request a recap, pause the story, or give feedback. Claude will acknowledge your OOC message and **stop** -- it won't continue the story until you send an in-character action. This means you can think out loud, ask questions, or take a break without accidentally pushing the narrative forward.
-
-- **Claude won't railroad you.** The DM instructions are explicitly designed to prep situations, not plots. Claude knows what's happening in the world and lets your choices determine where the story goes.
-
-- **Combat is tactical.** Claude draws ASCII maps, tracks positioning, and runs proper 5e combat with initiative, opportunity attacks, cover, the lot. Tell it where you move and what you do each turn.
-
-- **The world doesn't scale to you.** Some fights can't be won at level 1. Claude will drop hints when something is out of your league -- retreating is always an option.
-
-- **Update the template if you improve it.** If you tweak `CLAUDE.md` on main and want those changes in an existing campaign, just merge main into your campaign branch:
+- **Коммить чаще.** Больше коммитов — больше точек, куда можно откатиться.
+- **Не заглядывай в `dm_only/`.** Клод читает и пишет свои секретные заметки через отдельный субагент, чтобы они не попадали в диалог. Полезешь в `story_prep.md` — испортишь интригу самому себе.
+- **Задавай сеттинг подробно.** Чем конкретнее стартовое сообщение (эпоха, тон, за кого играешь, чего не хочешь видеть), тем точнее Сессия 0 попадёт в цель.
+- **Улучшил шаблон — обнови кампании.** Правки `CLAUDE.md` на main подтягиваются в кампанию мержем:
   ```bash
-  git checkout my-campaign
+  git checkout moya-kampaniya
   git merge main
   ```
 
-## Customising the DM
+## Настройка ГМа
 
-The `CLAUDE.md` file controls everything about how Claude runs the game. It's well-commented and designed to be tweaked. Want a lighter tone? Edit the Tone & Style section. Want different house rules? Add them. Want to change how combat pacing works? It's all in there.
+`CLAUDE.md` управляет всем поведением ГМа — это «движок», и под конкретную кампанию он не переписывается. Тон, жанр и жёсткость конкретной кампании живут в `adventure_style.md` и задаются на Сессии 0. Дефолт — тёмное, жёсткое фэнтези в духе Джо Аберкромби и Дэвида Геммела: морально серые NPC, реальные последствия, никаких лёгких побед. Хочется другого — просто скажи об этом на Сессии 0.
 
-The current defaults lean toward dark, gritty fantasy in the style of Joe Abercrombie and David Gemmell -- morally grey NPCs, real consequences, no easy wins. But that's just a starting point.
+## Благодарности
 
-## Credits
-
-- **D&D 5e SRD** provided under the Open Gaming License. The `DND.SRD.Wiki/` directory contains the [5e SRD in markdown format](https://github.com/OldManUmby/DND.SRD.Wiki).
-- Built with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) by Anthropic.
-- Created by [Koz](https://github.com/peonic-astro) after discovering that Claude is genuinely excellent at running tabletop RPGs.
+- **D&D 5e SRD** — по Open Gaming License. Каталог `DND.SRD.Wiki/` содержит [5e SRD в markdown](https://github.com/OldManUmby/DND.SRD.Wiki).
+- Работает на [Claude Code](https://docs.anthropic.com/en/docs/claude-code) от Anthropic.
+- Оригинальный шаблон создал [Koz](https://github.com/peonic-astro), обнаружив, что Клод по-настоящему хорош в роли ведущего настольных RPG.
 
 ---
 
-*"Roll for initiative."*
+*«Бросай инициативу».*
