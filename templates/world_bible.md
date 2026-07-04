@@ -1,7 +1,7 @@
 <!-- TEMPLATE: world_bible.md
 Copy to repo root during Session 0 and fill IN RUSSIAN.
-Keep exactly ONE of the two mode blocks below (Canon Universe OR Custom World),
-delete the other. Delete all HTML comments when filling.
+Keep exactly ONE of the three mode blocks below (Canon Universe, Custom World,
+or Classic Fantasy 5e), delete the others. Delete all HTML comments when filling.
 This file is the single source of truth about the world. After player approval
 it is APPEND-ONLY: new lore is added under "Установленный лор по сессиям" and
 must never contradict anything above it. -->
@@ -112,6 +112,33 @@ must never contradict anything above it. -->
 ## Темы и тон
 
 <!-- What this world is ABOUT. 3-5 sentences. -->
+
+---
+
+<!-- ============================================================
+     MODE 3: CLASSIC FANTASY 5e (minimal setup)
+     The world is standard SRD fantasy; only the campaign's starting
+     region needs defining. Prices follow the SRD as written.
+     ============================================================ -->
+
+## Стартовый регион
+
+<!-- The campaign's starting area: a named region, its settlements,
+     roads, dangers, travel times. A paragraph plus a short gazetteer. -->
+
+## Местные фракции и власть
+
+<!-- Who holds power here, who challenges it, active tensions. -->
+
+## Экономика
+
+Цены — по SRD (`DND.SRD.Wiki/Equipment/`). Валюта: медь/серебро/золото как в SRD.
+
+<!-- Note only local deviations: what's scarce or overpriced here, if anything. -->
+
+## Слухи и особенности региона
+
+<!-- What locals talk about; hooks the region offers. -->
 
 ---
 
